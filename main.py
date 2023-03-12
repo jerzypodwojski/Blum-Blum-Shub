@@ -162,7 +162,11 @@ if __name__ == '__main__':
         if not passed4:
             continue
         passed3 = test_3(bit_num)
+        if not passed3:
+            continue
         passed2 = test_2(bit_num)
+        if not passed2:
+            continue
         passed1 = test_1(bit_num)
 
         if passed1 and passed2 and passed3 and passed4:
