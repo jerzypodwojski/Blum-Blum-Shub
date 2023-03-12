@@ -1,4 +1,5 @@
 import random
+from math import sqrt
 
 
 def gen_pq():
@@ -6,7 +7,7 @@ def gen_pq():
     for i in range(99000, 99999):
         if i == 0 or i == 1:
             continue
-        for x in range(2, i):
+        for x in range(2, int(sqrt(i)) + 1):
             if i % x == 0:
                 break
         else:
@@ -183,12 +184,12 @@ if __name__ == '__main__':
     test_3(bit_num)
     test_4(bit_num)
 
-    # while True:
-    #    gen_n = gen_N()
-    #    seed = random.randint(1, 1 * 10 ** 10)
-    #    bit_num = gen_bit(seed, gen_n)
-    #    if tests():
-    #        break
+    while True:
+        gen_n = gen_N()
+        seed = random.randint(1, 1 * 10 ** 10)
+        bit_num = gen_bit(seed, gen_n)
+        if tests():
+            break
 
     print("generated N: " + str(gen_n))
     print("generated first X: " + str(seed))
