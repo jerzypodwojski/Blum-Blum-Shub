@@ -74,13 +74,9 @@ def test_4(bit_number):
         result_x += (bits[i]) ** 2
     result_x = (result_x * (16 / 5000)) - 5000
 
-    print(result_x)
     if 2.16 < result_x < 46.17:
-        print("bits : " + str(bits))
-        print("Test 4 passed.\n")
-        return True
+        return True, result_x, bits
     else:
-        print("Test 4 failed.\n")
         return False
 
 
@@ -108,13 +104,9 @@ def test_3(bit_number):
             num_len = 0
 
     if max_len_1 > 25 or max_len_0 > 25:
-        print("Test 3 failed.\n")
         return False
     else:
-        print("\nMax consecutive 1s: " + str(max_len_1))
-        print("Max consecutive 0s: " + str(max_len_0))
-        print("Test 3 passed.\n")
-        return True
+        return True, max_len_0, max_len_1
 
 
 def test_2(bit_number):
@@ -144,53 +136,62 @@ def test_2(bit_number):
                         if 103 < num_len_rest < 209:
                             test = True
     if test:
-        print("Consecutive 1s - 1 :" + str(num_len1))
-        print("Consecutive 1s - 2 :" + str(num_len2))
-        print("Consecutive 1s - 3 :" + str(num_len3))
-        print("Consecutive 1s - 4 :" + str(num_len4))
-        print("Consecutive 1s - 5 :" + str(num_len5))
-        print("Consecutive 1s - 6+ :" + str(num_len_rest))
-        print("Test 2 passed.\n")
-        return True
+        return True, num_len1, num_len2, num_len3, num_len4, num_len5, num_len_rest
     else:
-        print("Test 2 failed.\n")
         return False
 
 
 def test_1(bit_number):
     if 9725 < bit_number.count('1') < 10275:
-        print("Number of 1s: " + str(bit_number.count('1')))
-        print("Test 1 passed.\n")
-        return True
+        return True, bit_number.count('1')
     else:
-        print("Test 1 failed.\n")
         return False
 
 
-def tests():
-    if test_4(bit_num):
-        if test_1(bit_num) and test_2(bit_num) and test_3(bit_num):
-            return True
-    return False
-
-
 if __name__ == '__main__':
-    gen_n = gen_N()
-    seed = random.randint(1, 1 * 10 ** 10)
-    bit_num = gen_bit(seed, gen_n)
 
-    test_1(bit_num)
-    test_2(bit_num)
-    test_3(bit_num)
-    test_4(bit_num)
-
+    counter = 0
     while True:
+        counter += 1
+        print(counter)
         gen_n = gen_N()
         seed = random.randint(1, 1 * 10 ** 10)
         bit_num = gen_bit(seed, gen_n)
-        if tests():
+
+        passed4 = test_4(bit_num)
+        if not passed4:
+            continue
+        passed3 = test_3(bit_num)
+        passed2 = test_2(bit_num)
+        passed1 = test_1(bit_num)
+
+        if passed1 and passed2 and passed3 and passed4:
+            print("\nTest 1 passed.")
+            print("Number of 1s: " + str(passed1[1]) + "\n")
+
+            print("Test 2 passed.")
+            print("Consecutive 1s - 1: " + str(passed2[1]))
+            print("Consecutive 1s - 2: " + str(passed2[2]))
+            print("Consecutive 1s - 3: " + str(passed2[3]))
+            print("Consecutive 1s - 4: " + str(passed2[4]))
+            print("Consecutive 1s - 5: " + str(passed2[5]))
+            print("Consecutive 1s - 6+: " + str(passed2[6]) + "\n")
+
+            print("Test 3 passed.")
+            print("Max consecutive 1s: " + str(passed3[1]))
+            print("Max consecutive 0s: " + str(passed3[2]) + "\n")
+
+            print("Test 4 passed.")
+            print("X : " + str(passed4[1]))
+            print("bits (0:15) : " + str(passed4[2]) + "\n")
+
+            print("counter: " + str(counter))
+            print("generated N: " + str(gen_n))
+            print("generated first X: " + str(seed))
+            print("generated key: " + bit_num)
             break
 
-    print("generated N: " + str(gen_n))
-    print("generated first X: " + str(seed))
-    print("generated key: " + bit_num + "\n")
+
+
+
+
