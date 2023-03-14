@@ -70,7 +70,7 @@ def test_4(bit_number):
             bits[15] += 1
 
     result_x = 0
-    for i in range(15):
+    for i in range(16):
         result_x += (bits[i]) ** 2
     result_x = (result_x * (16 / 5000)) - 5000
 
