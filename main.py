@@ -4,9 +4,7 @@ from math import sqrt
 
 def gen_pq():
     prime_array = []
-    for i in range(99000, 99999):
-        if i == 0 or i == 1:
-            continue
+    for i in range(10000, 99999):
         for x in range(2, int(sqrt(i)) + 1):
             if i % x == 0:
                 break
@@ -18,8 +16,9 @@ def gen_pq():
 
 def gen_N():
     while True:
-        num1 = random.choice(gen_pq())
-        num2 = random.choice(gen_pq())
+        primes = gen_pq()
+        num1 = random.choice(primes)
+        num2 = random.choice(primes)
         if num1 != num2:
             return num1 * num2
 
